@@ -252,7 +252,7 @@
     <!-- Begin of hero section -->
     <section class="section hero-a fp-auto-height-responsive " data-section="home">
       <di class="section-title title-anim">
-        <div data-anim-visible='zoom-in'>
+        <div data-anim-visible='zoom-out'>
           <h2 class="text">Welcome</h2>
         </div>
       </di>
@@ -315,7 +315,7 @@
             <div class="col-12 col-lg-8 text-left">
               <!-- title and description -->
               <div class="title-desc">
-                <h2 class="display-3 anim-1 mb-4" data-anim-visible='fade'>About us</h2>
+                <h2 class="display-3 anim-1 mb-4" data-anim-visible='zoom-in'>About us</h2>
                 <div class="anim-2" data-anim-visible='fade'>
                   <p>as a national scale System Integrator (Sl) company that provides a variety of IT solutions specifically for core business customers</p>
 
@@ -477,100 +477,73 @@
 
     </section>
     <!-- End of services section -->
-    <!-- Begin of about section -->
+    <!-- Begin of subscribe section -->
     <section class="section section-a fp-auto-height-responsive " data-section="career">
-      <di class="section-title title-anim">
+      <div class="section-title title-anim">
         <div data-anim-visible='zoom-in'>
-          <h2 class="text">Career</h2>
+          <h2 class="text">career</h2>
         </div>
-      </di>
+      </div>
       <!-- Begin of section body -->
-      <div class="section-body section-contact" itemscope itemtype="https://schema.org/Organization">
+      <div class="section-body">
         <!-- content -->
         <div class="section-content container content-width anim">
           <div class="row justify-content-between">
             <div class="col-12 col-lg-6 text-left">
               <!-- title and description -->
-              <div class="title-desc">
-                <h2 class="display-3 anim-1 mb-4" data-anim-visible='fade'>Career</h2>
-                <div class="d-flex align-items-center  anim-2" data-anim-visible='fade'>
-                  <a class="email email-main btn-inline" href="mailto:hello@ourinbox.com"
-                    itemprop="email">hello@ourinbox.com</a>
-                  <button class="btn-fab btn-white ms-3" data-bs-toggle="modal" data-bs-target="#messageModals">
-                    <span class="icon"><i class="fa fa-handshake-o"></i></span>
+              <div class="title-desc pe-lg-5" data-anim-visible='fade'>
+                <h2 class="display-3 anim-1 mb-4">Career</h2>
+                <p class="anim-2">See yourself as a part of our dynamics and vibrant team?<br/>Drop in your info so we can reach you.</p>
+              </div>
+
+            </div>
+
+            <div class="col-12 col-lg-5 text-left">
+              <form id="form-subscribe" class="form-a form-subscribe" method="post" action="ajaxserver/serverfile.php"
+                data-anim-visible='fade'>
+                <div class="mb-3 success-gone">
+                  <label for="name-subscribe" class="form-label">Name</label>
+                  <input type="text" class="form-control form-control-a" id="name-subscribe"
+                    placeholder="Firstname Lastname" required>
+                </div>
+                <div class="mb-3 success-gone">
+                  <label for="email-subscribe" class="form-label">Email</label>
+                  <input type="email" class="form-control form-control-a" id="email-subscribe"
+                    placeholder="your@email.com" required>
+                </div>
+                <div class="mb-3 success-gone">
+                  <label for="email-subscribe" class="form-label">Handphone</label>
+                  <input type="text" class="form-control form-control-a" id="email-subscribe"
+                    placeholder="Handphone" required>
+                </div>
+                <div class="mb-3 success-gone">
+                  <label for="email-subscribe" class="form-label">Interested Field</label>
+                  <input type="text" class="form-control form-control-a" id="email-subscribe"
+                    placeholder="Interested Field" required>
+                </div>
+                <div class="mb-3 success-gone">
+                  <label for="email-subscribe" class="form-label">Latest Education</label>
+                  <input type="email" class="form-control form-control-a" id="email-subscribe"
+                    placeholder="Latest Education" required>
+                </div>
+                <div class="mt-4 success-gone">
+                  <button type="submit" class="btn btn-solid btn-white rounded-pill">
+                    <span class="text">Join with us</span>
                   </button>
                 </div>
-                <p class="anim-3" data-anim-visible='fade'>Feel free to ask us any questions related to our activities.
-                  We will be happy
-                  to answer you.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal modal-a " id="messageModals" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog popup-container">
-              <div class="modal-content">
-                <div class="popup-header">
-                  <div class="title">
-                    Join with us
-                  </div>
-                  <div class="btns-group">
-                    <button class="btn-icon btn-white ms-3" data-bs-dismiss="modal">
-                      <span class="icon"><i class="ion-md-close"></i></span>
-                    </button>
-                  </div>
+                <div class="info">
+                  <p class="success-show">Thank you for your subscription.</p>
+                  <p class="error">Oops, an error happened.</p>
                 </div>
-                <div class="popup-body">
-                  <form id="form-message" class="form-a form-message form-message" method="post"
-                    action="ajaxserver/serverfile.php">
-                    <div class="mb-3">
-                      <label for="name-message" class="form-label">Name</label>
-                      <input type="text" class="form-control form-control-a" id="name-message"
-                        placeholder="Firstname Lastname" required>
-                    </div>
-                    <div class="mb-3">
-                      <label for="email-message" class="form-label">Email</label>
-                      <input type="email" class="form-control form-control-a" id="email-message"
-                        placeholder="your@email.com" required>
-                    </div>
-                    <div class="mb-3">
-                      <label for="email-message" class="form-label">Handphone</label>
-                      <input type="email" class="form-control form-control-a" id="email-message"
-                        placeholder="your@email.com" required>
-                    </div>
-                    <div class="mb-3">
-                      <label for="message-message" class="form-label">Interested Field</label>
-                      <input type="email" class="form-control form-control-a" id="email-message"
-                        placeholder="Interested Field" required>
-                    </div>
-                    <div class="mb-3">
-                      <label for="email-message" class="form-label">Latest Education</label>
-                      <input type="email" class="form-control form-control-a" id="email-message"
-                        placeholder="Latest Education" required>
-                    </div>
-                    <div class="mt-4">
-                      <button class="btn btn-solid btn-white rounded-pill" type="submit">
-                        <span class="text">Join</span>
-                      </button>
-                      <div class="error-show">
-                        <p class="">Ooops, an error happened</p>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
+              </form>
             </div>
-            <form class="form-contact">
 
-            </form>
           </div>
-
-          
         </div>
       </div>
       <!-- End of section body -->
     </section>
-    <!-- End of about section -->
+    <!-- End of subscribe section -->
     
     <!-- Begin of home contact -->
     <section class="section section-a fp-auto-height-responsive " data-section="contact">
@@ -589,8 +562,8 @@
               <div class="title-desc">
                 <h2 class="display-3 anim-1 mb-4" data-anim-visible='fade'>Contact</h2>
                 <div class="d-flex align-items-center  anim-2" data-anim-visible='fade'>
-                  <a class="email email-main btn-inline" href="mailto:hello@ourinbox.com"
-                    itemprop="email">hello@ourinbox.com</a>
+                  <a class="email email-main btn-inline" href="mailto:intouch@empiria.co.id"
+                    itemprop="email">intouch@empiria.co.id</a>
                   <button class="btn-fab btn-white ms-3" data-bs-toggle="modal" data-bs-target="#messageModal">
                     <span class="icon"><i class="ion-md-mail"></i></span>
                   </button>
@@ -651,36 +624,19 @@
           </div>
 
           <div class="row mt-4 anim-4">
-            <div class="col-12 col-lg-4 mb-4 text-left">
+            <div class="col-12 col-lg-12 mb-4 text-left">
               <div itemprop="department" itemscope itemtype="https://schema.org/Place" data-anim-visible='fade'>
                 <h4 class="dep-name" itemprop="name">
-                  <strong>Antartica Office</strong>
+                  <strong>PT Empiria Tekno Dinamika</strong>
                 </h4>
                 <div class="dep-address" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                  <div class="addr-line">Phone: <span itemprop="telephone">(0)123-456-7890</span></div>
+                  <div class="addr-line">Phone: <span itemprop="telephone">(62)21 5701505</span></div>
                   <div class="addr-line">
-                    <span itemprop="streetAddress">12 Avenue de l'Est</span>
+                    <span itemprop="streetAddress">Jl Danau Toba Raya no. 76 Bendungan Hilir</span>
                   </div>
                   <div class="addr-line">
                     <!-- <span itemprop="postalCode">98000</span> -->
-                    <span itemprop="addressLocality">New Warc City, Antartica</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-lg-4 mb-4 text-left">
-              <div itemprop="department" itemscope itemtype="https://schema.org/Place" data-anim-visible='fade'>
-                <h4 class="dep-name" itemprop="name">
-                  <strong>Arctic Box</strong>
-                </h4>
-                <div class="dep-address" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                  <div class="addr-line">Phone: <span itemprop="telephone">(0)123-456-7890</span></div>
-                  <div class="addr-line">
-                    <span itemprop="streetAddress">21 East Street, First Box</span>
-                  </div>
-                  <div class="addr-line">
-                    <!-- <span itemprop="postalCode">98000</span> -->
-                    <span itemprop="addressLocality">Los Ingales, Arctica</span>
+                    <span itemprop="addressLocality">Tanah Abang, Jakarta Pusat.</span>
                   </div>
                 </div>
               </div>

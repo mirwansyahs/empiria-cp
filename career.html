@@ -92,11 +92,27 @@
               <li class="nav-item" data-section-anchor="home">
                 <a class="nav-link" aria-current="page" href="./index.html">Home</a>
               </li>
-              <li class="nav-item" data-section-anchor="home">
-                <a class="nav-link" aria-current="page" href="./about.html">About</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarTopDropdown" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  About
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarTopDropdown">
+                  <li><a class="dropdown-item" href="./about.html#journey">The Journey</a></li>
+                  <li><a class="dropdown-item" href="./about.html#visi">Vision Mission</a></li>
+                  <li><a class="dropdown-item" href="./about.html#corevalue">Core Value</a></li>
+                </ul>
               </li>
-              <li class="nav-item" data-section-anchor="home">
-                <a class="nav-link" aria-current="page" href="./solutions.html">Solutions</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarTopDropdown" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Solutions
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarTopDropdown">
+                  <li><a class="dropdown-item" href="./solutions.html#secure">Secure Green Technology</a></li>
+                  <li><a class="dropdown-item" href="./solutions.html#bussiness">Bussiness Collaboration</a></li>
+                  <li><a class="dropdown-item" href="./solutions.html#services">Managed Services</a></li>
+                </ul>
               </li>
               <li class="nav-item" data-section-anchor="home">
                 <a class="nav-link" aria-current="page" href="./career.html">Career</a>
@@ -121,11 +137,11 @@
 
       <div class="section-cover ">
         <!-- <img class="fit opacity-8" src="img/items/img-sample2.jpg" alt="person"> -->
-        <img class="fit opacity-2" src="img/street.jpg" alt="cover">
+        <img class="fit opacity-2" src="img/handshake.jpeg" alt="cover">
       </div>
       
       <div class="cover-page">
-        <div class="cover-bg bg-gradient-primary opacity-1"></div>
+        <div class="cover-bg bg-gradient-primary opacity-5"></div>
       </div>
 
       <!-- Begin of section body -->
@@ -159,36 +175,72 @@
 
               <!-- article content -->
               <article class="article-a">
-                <hr class="opacity-0">
+                <!-- <hr class="opacity-0"> -->
                 <!-- <h4>The Journey</h4> -->
                 <!-- <p align="justify" style="font-size: 16px;">
-                  PT Empiria Tekno Dinamika (“empiria”) story begin in 2013 to perform ICT business that can collaborate with all kind of customers. Not just to support but also to inspire them to achieve a working and suitable ICT environment. Implementing unique solution for each and every customer using the fast changing ICT Technology dynamics empiria has established relation with several companies in different area of businesses, such as Oil and Gas (energy), heavy equipment and insurance. Present them solutions from simple “Buy and Implement” to a complex “Reconfiguring Existing ICT Environment” projects empiria also built a strong partnership with each and every principal whose product and solution is integrated by us. Providing a more comprehensive solution to our customer so they can feel enjoy and secure during the implementation and operation process Without a thought, after more than 7 years of establishment. We, empiria have more confident to deliver to all of you solution that suits you So Please have a journey with us and share a story together
+                  Oops, we have no open position right now.<br/>
+                  If you interested in join our team, please fill joining form on the right.<br/>
+                  We will reach you as soon as we have open position suit you.
                 </p> -->
 
                 <!-- sample images -->
-                <div class="row g-5 align-items-center mt-4">
-                  <div class="col-12 col-md-6">
+                <div class="row g-5 align-items-center mt-0">
+                  <div class="col-12 col-md-7">
                     <!-- image -->
-                    <div class="item item-image-b col-12 col-lg-9">
+                    <div class="item item-image-b col-12 col-lg-12">
                       <div class="item-body">
                         <div class="desc">
-                          <!-- <h4>Visi</h4>
-                          <p align="justify">empiria aiming to become a world class National ICT Integrator company with good ethics that commit to the sustainable development of the organization and environment</p> -->
+                          <!-- <h4>Visi</h4> -->
+                          
+                          <p align="justify" style="font-size: 16px;">Feel free to ask us any questions related to our activities. We will be happy to answer you.
+                          </p>
                         </div>
                       </div>
                     </div>
                     <!-- end of image -->
                   </div>
-                  <div class="col-12 col-md-6">
+                  <div class="col-12 col-md-5">
                     <!-- image -->
                     <div class="item item-image-b">
                       <div class="item-body">
                         <div class="desc">
-                          <!-- <h4>Misi</h4>
-                          <p align="justify">Collaborate with customer to provide the most suitable solution to fit their technology needs
-Continues development of human resources for empiria employee and customer
-Building regional and global partnership
-Teaming with all stakeholders to create a good Corporate Social Responsibility outcome</p> -->
+                          <form id="form-subscribe" class="form-a form-subscribe" method="post" action="ajaxserver/serverfile.php"
+                            data-anim-visible='fade'>
+                            <div class="mb-3 success-gone">
+                              <label for="name-subscribe" class="form-label">Name</label>
+                              <input type="text" class="form-control form-control-a" id="name-subscribe"
+                                placeholder="Firstname Lastname" required>
+                            </div>
+                            <div class="mb-3 success-gone">
+                              <label for="email-subscribe" class="form-label">Email</label>
+                              <input type="email" class="form-control form-control-a" id="email-subscribe"
+                                placeholder="your@email.com" required>
+                            </div>
+                            <div class="mb-3 success-gone">
+                              <label for="email-subscribe" class="form-label">Handphone</label>
+                              <input type="text" class="form-control form-control-a" id="email-subscribe"
+                                placeholder="Handphone" required>
+                            </div>
+                            <div class="mb-3 success-gone">
+                              <label for="email-subscribe" class="form-label">Interested Field</label>
+                              <input type="text" class="form-control form-control-a" id="email-subscribe"
+                                placeholder="Interested Field" required>
+                            </div>
+                            <div class="mb-3 success-gone">
+                              <label for="email-subscribe" class="form-label">Latest Education</label>
+                              <input type="email" class="form-control form-control-a" id="email-subscribe"
+                                placeholder="Latest Education" required>
+                            </div>
+                            <div class="mt-4 success-gone">
+                              <button type="submit" class="btn btn-solid btn-white rounded-pill">
+                                <span class="text">Join with us</span>
+                              </button>
+                            </div>
+                            <div class="info">
+                              <p class="success-show">Thank you for your subscription.</p>
+                              <p class="error">Oops, an error happened.</p>
+                            </div>
+                          </form>
                         </div>
                       </div>
                     </div>
