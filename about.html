@@ -9,8 +9,7 @@
 
   <!-- Meta -->
   <!-- Page Description Here -->
-  <meta name="description"
-    content="Empiria - Post to experience">
+  <meta name="description" content="Empiria - Post to experience">
 
   <!-- Disable screen scaling-->
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, shrink-to-fit=no">
@@ -55,7 +54,480 @@
   <!-- add alt layout here -->
   <link rel="stylesheet" href="./css/style-default.css">
 
-  <script src="./js/vendor/modernizr-2.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"
+    integrity="sha512-xxwB6MnY5MI87ptYSCYVFmRaYTC9VHOY1sya6oo1QfyN+i1Hmxu/0T3x6bssjMNlNI+WsBDCAlN/TNywKDPlQQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Relief Circles Style -->
+  <style>
+    .relief-container {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 70px;
+      flex-wrap: wrap;
+      padding: 100px 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .relief-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      flex-shrink: 0;
+    }
+
+    .relief-circles-wrapper {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .relief-svg-lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .relief-center {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background-color: #1e5ba8;
+      border: 2px solid #1e5ba8;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: default;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      z-index: 10;
+      box-shadow: 0 0 40px rgba(30, 91, 168, 0.5);
+      transition: all 0.4s ease;
+      animation: popIn 0.8s 1.0s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      opacity: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .relief-center:hover {
+      box-shadow: 0 0 50px rgba(30, 91, 168, 0.8);
+    }
+
+    .relief-center-text {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 6px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .relief-center-sub {
+      font-size: 11px;
+      opacity: 0.9;
+      text-transform: uppercase;
+      letter-spacing: 0.35em;
+    }
+
+    .relief-circle {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      background-color: transparent;
+      color: #ffffff;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-family: inherit;
+      opacity: 0;
+    }
+
+    .relief-circle .relief-letter {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .relief-circle .relief-label {
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      color: rgba(255, 255, 255, 0.7);
+      text-transform: uppercase;
+      margin-top: 4px;
+      white-space: nowrap;
+      font-weight: 600;
+    }
+
+    .relief-circle:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      /* transform: scale(1.1) !important; */
+      box-shadow: 0 0 25px rgba(30, 91, 168, 0.5);
+    }
+
+    .relief-circle.active-node {
+      background-color: #1e5ba8 !important;
+      border-color: #1e5ba8 !important;
+      color: #ffffff;
+      box-shadow: 0 0 30px rgba(30, 91, 168, 0.8) !important;
+      /* transform: scale(1.1) !important; */
+    }
+
+    /* Position circles in perfect heptagon - improved spacing */
+    .relief-circle:nth-child(1) {
+      top: 0%;
+      left: 50%;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .relief-circle:nth-child(2) {
+      top: 13%;
+      left: 80%;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .relief-circle:nth-child(3) {
+      top: 50%;
+      left: 95%;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .relief-circle:nth-child(4) {
+      top: 87%;
+      left: 80%;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .relief-circle:nth-child(5) {
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .relief-circle:nth-child(6) {
+      top: 87%;
+      left: 20%;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .relief-circle:nth-child(7) {
+      top: 50%;
+      left: 5%;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Word strip */
+    .relief-word-strip {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      justify-content: center;
+      margin-top: 30px;
+      animation: fadeUp 0.7s 1.8s forwards;
+      opacity: 0;
+    }
+
+    .relief-word-strip span {
+      font-size: 32px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.2);
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      transition: color 0.3s, transform 0.2s;
+      font-family: inherit;
+    }
+
+    .relief-word-strip span.active,
+    .relief-word-strip span:hover {
+      color: #ffffff;
+      transform: scale(1.15);
+    }
+
+    .relief-description {
+      flex: 1;
+      min-width: 320px;
+      max-width: 400px;
+      background: rgba(30, 91, 168, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      border-left: 4px solid #1e5ba8;
+      padding: 0;
+      transition: all 0.4s ease;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateX(20px);
+      animation: fadeUp 0.7s 0.5s forwards;
+    }
+
+    .relief-description.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .relief-panel-top-bar {
+      height: 4px;
+      background: #1e5ba8;
+    }
+
+    .relief-panel-inner {
+      padding: 2rem 2rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .relief-panel-empty {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      opacity: 0.6;
+    }
+
+    .relief-panel-empty p {
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      color: #c9c8c8;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.9;
+      font-weight: 500;
+    }
+
+    .relief-panel-filled {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      animation: slideInPanel 0.4s ease;
+    }
+
+    .relief-panel-filled.show {
+      display: flex;
+    }
+
+    .relief-value-number {
+      color: #1e5ba8;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.35em;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .relief-value-title {
+      color: #ffffff;
+      font-size: 32px;
+      font-weight: bold;
+      line-height: 1.2;
+    }
+
+    .relief-value-divider {
+      width: 40px;
+      height: 2px;
+      background: #1e5ba8;
+      border-radius: 1px;
+      margin-top: 10px;
+    }
+
+    .relief-value-text {
+      color: #c9c8c8;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-top: 12px;
+      flex: 1;
+    }
+
+    .relief-panel-big-letter {
+      position: absolute;
+      bottom: 0.5rem;
+      right: 1.2rem;
+      font-size: 5.5rem;
+      font-weight: 700;
+      color: #1e5ba8;
+      opacity: 0.08;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Animations */
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    @keyframes nodeAppear {
+      from {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(0.2);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(var(--tx), var(--ty)) scale(1);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInPanel {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .relief-circles-wrapper {
+        width: 420px;
+        height: 420px;
+      }
+
+      .relief-circle {
+        width: 72px;
+        height: 72px;
+        font-size: 24px;
+      }
+
+      .relief-circle .relief-letter {
+        font-size: 28px;
+      }
+
+      .relief-center {
+        width: 135px;
+        height: 135px;
+        font-size: 11px;
+      }
+
+      .relief-center-text {
+        font-size: 16px;
+      }
+
+      .relief-container {
+        flex-direction: column;
+        gap: 45px;
+      }
+
+      .relief-word-strip {
+        margin-top: 25px;
+      }
+
+      .relief-word-strip span {
+        font-size: 28px;
+      }
+
+      .relief-description {
+        min-width: 300px;
+        max-width: 360px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .relief-circles-wrapper {
+        width: 340px;
+        height: 340px;
+      }
+
+      .relief-circle {
+        width: 64px;
+        height: 64px;
+        font-size: 20px;
+      }
+
+      .relief-circle .relief-letter {
+        font-size: 24px;
+      }
+
+      .relief-circle .relief-label {
+        font-size: 0.5rem;
+        margin-top: 3px;
+      }
+
+      .relief-center {
+        width: 110px;
+        height: 110px;
+        font-size: 10px;
+      }
+
+      .relief-center-text {
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+
+      .relief-word-strip {
+        margin-top: 22px;
+        gap: 0.6rem;
+      }
+
+      .relief-word-strip span {
+        font-size: 24px;
+      }
+
+      .relief-description {
+        min-width: 280px;
+        max-width: 320px;
+        min-height: 260px;
+      }
+
+      .relief-panel-inner {
+        padding: 1.6rem 1.6rem 1.2rem;
+      }
+
+      .relief-value-title {
+        font-size: 26px;
+      }
+
+      .relief-panel-big-letter {
+        font-size: 4.5rem;
+      }
+    }
+  </style>
 </head>
 
 <body id="menu" class="body-page">
@@ -139,7 +611,7 @@
         <!-- <img class="fit opacity-8" src="img/items/img-sample2.jpg" alt="person"> -->
         <img class="fit opacity-2" src="img/IMG_2009.jpg" alt="cover">
       </div>
-      
+
       <div class="cover-page">
         <div class="cover-bg bg-gradient-primary opacity-5"></div>
       </div>
@@ -177,8 +649,18 @@
               <article class="article mt-5">
                 <hr class="opacity-0">
                 <h4>The Journey</h4>
-                <p align="justify" style="font-size: 18px; color: #c9c8c8;" >
-                  PT Empiria Tekno Dinamika (“empiria”) story begin in 2013 to perform ICT business that can collaborate with all kind of customers. Not just to support but also to inspire them to achieve a working and suitable ICT environment. Implementing unique solution for each and every customer using the fast changing ICT Technology dynamics empiria has established relation with several companies in different area of businesses, such as Oil and Gas (energy), heavy equipment and insurance. Present them solutions from simple “Buy and Implement” to a complex “Reconfiguring Existing ICT Environment” projects, empiria also built a strong partnership with each and every principal whose product and solution is integrated by us. Providing a more comprehensive solution to our customer so they can feel enjoy and secure during the implementation and operation process. After more than 9 years of establishment. Empiria have more confident to deliver to all of you solution that suits you.<br/>So Please have a journey with us and share a story together
+                <p align="justify" style="font-size: 18px; color: #c9c8c8;">
+                  PT Empiria Tekno Dinamika (“empiria”) story begin in 2013 to perform ICT business that can collaborate
+                  with all kind of customers. Not just to support but also to inspire them to achieve a working and
+                  suitable ICT environment. Implementing unique solution for each and every customer using the fast
+                  changing ICT Technology dynamics empiria has established relation with several companies in different
+                  area of businesses, such as Oil and Gas (energy), heavy equipment and insurance. Present them
+                  solutions from simple “Buy and Implement” to a complex “Reconfiguring Existing ICT Environment”
+                  projects, empiria also built a strong partnership with each and every principal whose product and
+                  solution is integrated by us. Providing a more comprehensive solution to our customer so they can feel
+                  enjoy and secure during the implementation and operation process. After more than 9 years of
+                  establishment. Empiria have more confident to deliver to all of you solution that suits you.<br />So
+                  Please have a journey with us and share a story together
                 </p>
 
                 <!-- sample images -->
@@ -189,7 +671,9 @@
                       <div class="item-body">
                         <div class="desc">
                           <h4>Vision</h4>
-                          <p align="justify" style="font-size: 18px; color: #c9c8c8;">empiria aiming to become a world class National ICT Integrator company with good ethics that commit to the sustainable development of the organization and environment</p>
+                          <p align="justify" style="font-size: 18px; color: #c9c8c8;">empiria aiming to become a world
+                            class National ICT Integrator company with good ethics that commit to the sustainable
+                            development of the organization and environment</p>
                         </div>
                       </div>
                     </div>
@@ -204,7 +688,7 @@
                       <div class="item-body">
                         <div class="desc">
                           <!-- Image disini -->
-                          
+
                         </div>
                       </div>
                     </div>
@@ -232,12 +716,14 @@
                         <div class="desc">
                           <h4>Mision</h4>
                           <p align="justify" style="font-size: 18px; color: #c9c8c8;">
-                            <ul style="font-size: 18px; color: #c9c8c8; text-align: justify;">
-                              <li>Collaborate with customer to provide the most suitable solution to fit their technology needs</li>
-                              <li>Continues development of human resources for empiria employee and customer</li>
-                              <li>Building regional and global partnership</li>
-                              <li>Teaming with all stakeholders to create a good Corporate Social Responsibility outcome</li>
-                            </ul>
+                          <ul style="font-size: 18px; color: #c9c8c8; text-align: justify;">
+                            <li>Collaborate with customer to provide the most suitable solution to fit their technology
+                              needs</li>
+                            <li>Continues development of human resources for empiria employee and customer</li>
+                            <li>Building regional and global partnership</li>
+                            <li>Teaming with all stakeholders to create a good Corporate Social Responsibility outcome
+                            </li>
+                          </ul>
                           </p>
                         </div>
                       </div>
@@ -253,49 +739,45 @@
                       <div class="item-bod">
                         <div class="des">
                           <h4>Core Values</h4>
-                          <p align="justify" style="font-size: 18px; color: #c9c8c8;">To Achieve our statement on mission and vision, empiria has committed to follow our defined values, share it to all empiria’s stake holder to uphold and cherish it and at the end of the day we might feel RELIEVE about what we have done internally and throughout our customers</p>
+                          <p align="justify" style="font-size: 18px; color: #c9c8c8;">To Achieve our statement on
+                            mission and vision, empiria has committed to follow our defined values, share it to all
+                            empiria’s stake holder to uphold and cherish it and at the end of the day we might feel
+                            RELIEVE about what we have done internally and throughout our customers</p>
                         </div>
                       </div>
                     </div>
                     <!-- end of image -->
                   </div>
                 </div>
-                
+
                 <!-- sample images -->
-                <div class="row g-5 align-items-center mt-0 mb-0" id="misi">
-                  <div class="col-12 col-md-12">
-                    <!-- image -->
-                    <div class="item item-image-b col-12 col-lg-9">
-                      <div class="item-body">
-                        <div class="desc">
-                          <!-- Image disini -->
-                        </div>
-                      </div>
-                    </div>
-                    <!-- end of image -->
-                  </div>
+                <div class="row g-0 align-items-center mt-0" id="misi">
                   <div class="col-12 col-md-6">
                     <!-- image -->
                     <div class="item item-image-b col-12 col-lg-9">
                       <div class="item-body">
                         <div class="desc">
-                            <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                          <!-- Image disini -->
+                          <div class="relief-container">
+                            <!-- Circles arrangement -->
+                            <div class="relief-wrapper">
+                              <div class="relief-circles-wrapper" id="reliefStage">
+                                <!-- SVG connections -->
+                                <svg class="relief-svg-lines" id="reliefSvg"></svg>
 
-                              <button class="nav-link active" style="color: #FFFFFF" id="v-pills-responsible-tab" data-bs-toggle="pill" data-bs-target="#v-pills-responsible" type="button" role="tab" aria-controls="v-pills-responsible" aria-selected="true">Responsible</button>
+                                <!-- Center circle -->
+                                <div class="relief-center">
+                                  <div class="relief-center-text">RELIEVE</div>
+                                  <div class="relief-center-sub">Core Values</div>
+                                </div>
 
-                              <button class="nav-link" style="color: #FFFFFF" id="v-pills-experienced-tab" data-bs-toggle="pill" data-bs-target="#v-pills-experienced" type="button" role="tab" aria-controls="v-pills-experienced" aria-selected="false">Experienced</button>
+                                <!-- Outer circles will be generated by JS -->
+                              </div>
 
-                              <button class="nav-link" style="color: #FFFFFF" id="v-pills-learn-tab" data-bs-toggle="pill" data-bs-target="#v-pills-learn" type="button" role="tab" aria-controls="v-pills-learn" aria-selected="false">Learn</button>
-
-                              <button class="nav-link" style="color: #FFFFFF" id="v-pills-innovate-tab" data-bs-toggle="pill" data-bs-target="#v-pills-innovate" type="button" role="tab" aria-controls="v-pills-innovate" aria-selected="false">Innovate</button>
-
-                              <button class="nav-link" style="color: #FFFFFF" id="v-pills-ethical-tab" data-bs-toggle="pill" data-bs-target="#v-pills-ethical" type="button" role="tab" aria-controls="v-pills-ethical" aria-selected="false">Ethical</button>
-
-                              <button class="nav-link" style="color: #FFFFFF" id="v-pills-virtue-tab" data-bs-toggle="pill" data-bs-target="#v-pills-virtue" type="button" role="tab" aria-controls="v-pills-virtue" aria-selected="false">Virtue</button>
-
-                              <button class="nav-link" style="color: #FFFFFF" id="v-pills-environtment-tab" data-bs-toggle="pill" data-bs-target="#v-pills-environtment" type="button" role="tab" aria-controls="v-pills-environtment" aria-selected="false">Environtment</button>
-
+                              <!-- Word strip -->
+                              <div class="relief-word-strip" id="reliefWordStrip"></div>
                             </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -306,15 +788,31 @@
                     <div class="item item-image-">
                       <div class="item-body">
                         <div class="desc">
-                          <div class="d-flex align-items-start">
-                            <div class="tab-content" id="v-pills-tabContent">
-                              <div class="tab-pane fade show active" id="v-pills-responsible" role="tabpanel" aria-labelledby="v-pills-responsible-tab">Responsible</div>
-                              <div class="tab-pane fade" id="v-pills-experienced" role="tabpanel" aria-labelledby="v-pills-experienced-tab">Experienced</div>
-                              <div class="tab-pane fade" id="v-pills-learn" role="tabpanel" aria-labelledby="v-pills-learn-tab">Learn</div>
-                              <div class="tab-pane fade" id="v-pills-innovate" role="tabpanel" aria-labelledby="v-pills-innovate-tab">Innovate</div>
-                              <div class="tab-pane fade" id="v-pills-ethical" role="tabpanel" aria-labelledby="v-pills-ethical-tab">Ethical</div>
-                              <div class="tab-pane fade" id="v-pills-virtue" role="tabpanel" aria-labelledby="v-pills-virtue-tab">Virtue</div>
-                              <div class="tab-pane fade" id="v-pills-environtment" role="tabpanel" aria-labelledby="v-pills-environtment-tab">Environtment</div>
+                          <!-- Description panel -->
+                          <div class="relief-description" id="reliefPanel">
+                            <!-- <div class="relief-panel-top-bar"></div> -->
+                            <div class="relief-panel-inner">
+                              <div class="relief-panel-empty" id="reliefPanelEmpty">
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                  <circle cx="16" cy="16" r="15" stroke="#1e5ba8" stroke-width="1.5"
+                                    stroke-dasharray="4 3" />
+                                  <circle cx="16" cy="16" r="5" stroke="#1e5ba8" stroke-width="1.5" />
+                                  <line x1="16" y1="2" x2="16" y2="8" stroke="#1e5ba8" stroke-width="1.5" />
+                                  <line x1="16" y1="24" x2="16" y2="30" stroke="#1e5ba8" stroke-width="1.5" />
+                                  <line x1="2" y1="16" x2="8" y2="16" stroke="#1e5ba8" stroke-width="1.5" />
+                                  <line x1="24" y1="16" x2="30" y2="16" stroke="#1e5ba8" stroke-width="1.5" />
+                                </svg>
+                                <p>Click a letter to<br>explore our values</p>
+                              </div>
+
+                              <div class="relief-panel-filled" id="reliefPanelFilled">
+                                <div class="relief-value-number" id="reliefValueNum"></div>
+                                <div class="relief-value-title" id="reliefValueTitle"></div>
+                                <div class="relief-value-divider"></div>
+                                <div class="relief-value-text" id="reliefValueDesc"></div>
+                              </div>
+
+                              <div class="relief-panel-big-letter" id="reliefPanelBig"></div>
                             </div>
                           </div>
                         </div>
@@ -323,6 +821,7 @@
                     <!-- end of image -->
                   </div>
                 </div>
+
               </article>
 
             </div>
@@ -334,7 +833,7 @@
 
     </section>
     <!-- End of about section -->
-    
+
   </main>
   <!-- END OF page main content -->
 
@@ -342,7 +841,7 @@
   <footer id="site-footer" class="footer-page ">
     <!-- Left content -->
     <div class="footer-left">
-      <p class="note text-sm">&copy; 2023 <a href="http://highhay.com"><span class="marked">Empiria</span></a>
+      <p class="note text-sm">&copy; 2023 <a href="#"><span class="marked">Empiria</span></a>
       </p>
     </div>
   </footer>
@@ -366,6 +865,217 @@
   <script src="./js/main.js"></script>
 
   <script src="./js/init-form.js"></script>
+
+  <!-- Relief Circles Script -->
+  <script>
+    const reliefValues = [
+      {
+        letter: 'R',
+        name: 'Responsible',
+        number: '01',
+        description: 'We take accountability for our actions and decisions, ensuring we fulfill our commitments to customers, partners, and stakeholders with integrity and transparency.'
+      },
+      {
+        letter: 'E',
+        name: 'Experienced',
+        number: '02',
+        description: 'Our team brings years of expertise and deep knowledge in ICT solutions, enabling us to deliver proven results and best practices to every project.'
+      },
+      {
+        letter: 'L',
+        name: 'Learn',
+        number: '03',
+        description: 'We continuously embrace learning and improvement, staying updated with the latest technologies and methodologies to provide cutting-edge solutions.'
+      },
+      {
+        letter: 'I',
+        name: 'Innovate',
+        number: '04',
+        description: 'We foster creativity and forward-thinking solutions, constantly seeking new ways to improve and optimize our services for our clients\' evolving needs.'
+      },
+      {
+        letter: 'E',
+        name: 'Ethical',
+        number: '05',
+        description: 'We operate with strong moral principles, maintaining the highest standards of business ethics and ensuring fair dealings with all stakeholders.'
+      },
+      {
+        letter: 'V',
+        name: 'Virtue',
+        number: '06',
+        description: 'We embody positive qualities of excellence, reliability, and virtue in all our endeavors, leading by example and inspiring confidence in our partnerships.'
+      },
+      {
+        letter: 'E',
+        name: 'Environment',
+        number: '07',
+        description: 'We are committed to environmental sustainability, implementing green technologies and responsible practices to minimize our ecological impact.'
+      }
+    ];
+
+    const stage = document.getElementById('reliefStage');
+    const svgEl = document.getElementById('reliefSvg');
+    const panel = document.getElementById('reliefPanel');
+    const panelEmpty = document.getElementById('reliefPanelEmpty');
+    const panelFilled = document.getElementById('reliefPanelFilled');
+    const panelValueNum = document.getElementById('reliefValueNum');
+    const panelValueTitle = document.getElementById('reliefValueTitle');
+    const panelValueDesc = document.getElementById('reliefValueDesc');
+    const panelBigLetter = document.getElementById('reliefPanelBig');
+    const wordStrip = document.getElementById('reliefWordStrip');
+
+    const W = stage.offsetWidth;
+    const cx = W / 2, cy = W / 2;
+    const R = W * 0.36;
+    const nodeRadius = 40;
+    let activeIndex = -1;
+    let cycleTimer = null;
+
+    // Calculate positions
+    const positions = reliefValues.map((_, i) => {
+      const angle = (i / reliefValues.length) * 2 * Math.PI - Math.PI / 2;
+      return {
+        x: cx + R * Math.cos(angle),
+        y: cy + R * Math.sin(angle)
+      };
+    });
+
+    // Create SVG lines center to nodes
+    positions.forEach((pos, i) => {
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', cx);
+      line.setAttribute('y1', cy);
+      line.setAttribute('x2', pos.x);
+      line.setAttribute('y2', pos.y);
+      line.setAttribute('stroke', 'rgba(255,255,255,0.08)');
+      line.setAttribute('stroke-width', '1');
+      line.setAttribute('stroke-dasharray', '3 6');
+      line.classList.add('relief-svg-line');
+      line.setAttribute('data-index', i);
+      svgEl.appendChild(line);
+    });
+
+    // Create SVG arcs between nodes
+    for (let i = 0; i < reliefValues.length; i++) {
+      const p1 = positions[i];
+      const p2 = positions[(i + 1) % reliefValues.length];
+      const mx = (p1.x + p2.x) / 2;
+      const my = (p1.y + p2.y) / 2;
+      const vx = cx - mx;
+      const vy = cy - my;
+      const len = Math.sqrt(vx * vx + vy * vy);
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', `M${p1.x},${p1.y} Q${mx + vx / len * 20},${my + vy / len * 20} ${p2.x},${p2.y}`);
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', 'rgba(255,255,255,0.06)');
+      path.setAttribute('stroke-width', '1');
+      svgEl.appendChild(path);
+    }
+
+    // Create letter nodes
+    const nodeElements = reliefValues.map((v, i) => {
+      const pos = positions[i];
+      const tx = pos.x - nodeRadius;
+      const ty = pos.y - nodeRadius;
+      const node = document.createElement('button');
+      node.className = 'relief-circle';
+      node.style.cssText = `left:0;top:0;--tx:${tx}px;--ty:${ty}px;transform:translate(${tx}px,${ty}px);animation:nodeAppear 0.5s ${1.2 + i * 0.1}s cubic-bezier(0.34,1.56,0.64,1) forwards;`;
+      node.innerHTML = `<span class="relief-letter">${v.letter}</span><span class="relief-label">${v.name}</span>`;
+      node.addEventListener('click', () => {
+        clearInterval(cycleTimer);
+        if (activeIndex === i) {
+          clearActive();
+        } else {
+          setActive(i);
+        }
+      });
+      stage.appendChild(node);
+      return node;
+    });
+
+    // Create word strip
+    reliefValues.forEach((v, i) => {
+      const span = document.createElement('span');
+      span.textContent = v.letter;
+      span.style.cssText = `animation: fadeUp 0.7s ${1.8 + i * 0.05}s forwards; opacity: 0;`;
+      span.addEventListener('click', () => nodeElements[i].click());
+      wordStrip.appendChild(span);
+    });
+
+    function showDetail(i) {
+      const v = reliefValues[i];
+      panelEmpty.style.display = 'none';
+      panelFilled.classList.remove('show');
+      void panelFilled.offsetWidth;
+      panelValueNum.textContent = `— CORE VALUE ${v.number}`;
+      panelValueTitle.textContent = v.name;
+      panelValueDesc.textContent = v.description;
+      panelBigLetter.textContent = v.letter;
+      panelFilled.style.display = 'flex';
+      panelFilled.classList.add('show');
+      panel.classList.add('visible');
+    }
+
+    function clearDetail() {
+      panelFilled.classList.remove('show');
+      panelFilled.style.display = 'none';
+      panelEmpty.style.display = 'flex';
+      panel.classList.remove('visible');
+    }
+
+    function setActive(i) {
+      activeIndex = i;
+      nodeElements.forEach((n, j) => {
+        const p = positions[j];
+        n.classList.toggle('active-node', j === i);
+        n.style.transform = j === i
+          ? `translate(${p.x - nodeRadius}px,${p.y - nodeRadius}px) scale(1.1)`
+          : `translate(${p.x - nodeRadius}px,${p.y - nodeRadius}px) scale(1)`;
+      });
+
+      document.querySelectorAll('.relief-word-strip span').forEach((s, j) => {
+        s.classList.toggle('active', j === i);
+      });
+
+      const lines = document.querySelectorAll('.relief-svg-line');
+      lines.forEach((l, j) => {
+        if (j === i) {
+          l.setAttribute('stroke', 'rgba(30,91,168,0.75)');
+          l.setAttribute('stroke-width', '2');
+        } else {
+          l.setAttribute('stroke', 'rgba(255,255,255,0.08)');
+          l.setAttribute('stroke-width', '1');
+        }
+      });
+
+      showDetail(i);
+    }
+
+    function clearActive() {
+      activeIndex = -1;
+      nodeElements.forEach((n, j) => {
+        const p = positions[j];
+        n.classList.remove('active-node');
+        n.style.transform = `translate(${p.x - nodeRadius}px,${p.y - nodeRadius}px) scale(1)`;
+      });
+
+      document.querySelectorAll('.relief-word-strip span').forEach(s => {
+        s.classList.remove('active');
+      });
+
+      document.querySelectorAll('.relief-svg-line').forEach(l => {
+        l.setAttribute('stroke', 'rgba(255,255,255,0.08)');
+        l.setAttribute('stroke-width', '1');
+      });
+
+      clearDetail();
+    }
+
+    // Panel visibility
+    setTimeout(() => {
+      panel.classList.add('visible');
+    }, 2000);
+  </script>
 
 </body>
 
